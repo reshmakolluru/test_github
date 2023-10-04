@@ -26,5 +26,4 @@ try:
         print("Salary  = ", row[3], "\n")
 except Error as e:
     print("Error reading data from MySQL table", e)
-
-
+    print("error: ", e)
