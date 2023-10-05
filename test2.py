@@ -4,6 +4,9 @@ import pandas as pd
 import config
 from process_mix_events import Process_CSVA_EVENTS as p
 tp_instances = []
+import mysql.connector
+from mysql.connector import Error
+
 
 app = faust.App(config.CONSUMER_GRP,broker='kafka://kafka:9092',consumer_auto_offset_reset="earliest")
 partition=0
@@ -19,3 +22,8 @@ async def receive(stream):
         print(df['appid'])
         await p().process_kafka_events(df)
         print(event)
+        
+connection = mysql.connector.connect(host='localhost',
+                                         database='python_db',
+                                         user='pynative',
+                                         password='pynative@#29')
